@@ -45,3 +45,24 @@ test('without source', function () {
     assert(err.src === undefined);
   });
 });
+
+test('with column', function () {
+  test('and with a filename', function () {
+    var err = error('MY_CODE', 'My message', {line: 3, column: 1, filename: 'myfile'});
+    assert(err.message === 'myfile:3:1\n\nMy message');
+    assert(err.code === 'JADE:MY_CODE');
+    assert(err.msg === 'My message');
+    assert(err.line === 3);
+    assert(err.filename === 'myfile');
+    assert(err.src === undefined);
+  });
+  test('and with no filename', function () {
+    var err = error('MY_CODE', 'My message', {line: 3, column: 1});
+    assert(err.message === 'Jade:3:1\n\nMy message');
+    assert(err.code === 'JADE:MY_CODE');
+    assert(err.msg === 'My message');
+    assert(err.line === 3);
+    assert(err.filename === undefined);
+    assert(err.src === undefined);
+  });
+});
