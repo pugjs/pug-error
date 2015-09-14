@@ -31,5 +31,14 @@ function makeError(code, message, options) {
   err.column = column;
   err.filename = filename;
   err.src = src;
+  err.toJSON = function () {
+    return {
+      code: this.code,
+      msg: this.msg,
+      line: this.line,
+      column: this.column,
+      filename: this.filename
+    };
+  };
   return err;
 }
