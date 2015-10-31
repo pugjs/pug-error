@@ -6,8 +6,8 @@ function makeError(code, message, options) {
   var column = options.column;
   var filename = options.filename;
   var src = options.src;
-  var fullMessage;
   var location = line + (column ? ':' + column : '');
+  var fullMessage = (filename || 'Jade') + ':' + location + ': ' + message;
   if (src) {
     var lines = src.split('\n');
     var start = Math.max(line - 3, 0);
@@ -20,9 +20,7 @@ function makeError(code, message, options) {
         + '| '
         + text;
     }).join('\n');
-    fullMessage = (filename || 'Jade') + ':' + location + '\n' + context + '\n\n' + message;
-  } else {
-    fullMessage = (filename || 'Jade') + ':' + location + '\n\n' + message;
+    fullMessage += '\n' + context + '\n';
   }
   var err = new Error(fullMessage);
   err.code = 'JADE:' + code;
