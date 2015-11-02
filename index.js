@@ -15,10 +15,15 @@ function makeError(code, message, options) {
     // Error context
     var context = lines.slice(start, end).map(function(text, i){
       var curr = i + start + 1;
-      return (curr == line ? '  > ' : '    ')
+      var preamble = (curr == line ? '  > ' : '    ')
         + curr
-        + '| '
-        + text;
+        + '| ';
+      var out = preamble + text;
+      if (curr === line && column) {
+        out += '\n';
+        out += Array(preamble.length + column).join('-') + '^';
+      }
+      return out;
     }).join('\n');
     fullMessage = (filename || 'Jade') + ':' + location + '\n' + context + '\n\n' + message;
   } else {
