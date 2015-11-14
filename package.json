@@ -1,12 +1,13 @@
 {
   "name": "jade-error",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Standard error objects for jade",
-  "keywords": [],
+  "keywords": [
+    "jade"
+  ],
   "files": [
     "index.js"
   ],
-  "dependencies": {},
   "devDependencies": {
     "istanbul": "^0.3.17",
     "testit": "^2.0.2"
