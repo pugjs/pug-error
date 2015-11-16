@@ -1,5 +1,7 @@
 'use strict';
 
+var objectAssign = require('object-assign');
+
 module.exports = makeError;
 function makeError(code, message, options) {
   var line = options.line;
@@ -47,3 +49,10 @@ function makeError(code, message, options) {
   };
   return err;
 }
+
+makeError.extend = function (origErr, addition) {
+  var code = addition.code || origErr.code.replace(/^JADE:/, '');
+  var msg = addition.msg || origErr.msg;
+  var newOptions = objectAssign({}, origErr, addition);
+  return makeError(code, msg, newOptions);
+};

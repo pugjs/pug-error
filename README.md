@@ -50,6 +50,32 @@ var err = error('MY_CODE', 'My message', {line: 3, filename: 'myfile', src: 'foo
 throw err;
 ```
 
+### `error.extend(origErr, addition)`
+
+Extend an existing Jade error with additional information.
+
+This is useful when you get an error from a Jade module that has no knowledge of certain properties (a common example would be `src`) and you would like to add that additional information to the formatted error message.
+
+```js
+var origErr = error('MY_CODE', 'My message', {line: 3, filename: 'myfile'});
+// { code: 'JADE:MY_CODE',
+//   msg: 'My message',
+//   line: 3,
+//   column: undefined,
+//   filename: 'myfile',
+//   src: undefined,
+//   message: 'myfile:3\n\nMy message' }
+
+var newErr = error.extend(origErr, {src: 'foo\nbar\nbaz\nbash\nbing'});
+// { code: 'JADE:MY_CODE',
+//   msg: 'My message',
+//   line: 3,
+//   column: undefined,
+//   filename: 'myfile',
+//   src: 'foo\nbar\nbaz\nbash\nbing',
+//   message: 'myfile:3\n    1| foo\n    2| bar\n  > 3| baz\n    4| bash\n    5| bing\n\nMy message' }
+```
+
 ## License
 
   MIT
