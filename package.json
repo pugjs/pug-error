@@ -1,9 +1,9 @@
 {
-  "name": "jade-error",
+  "name": "pug-error",
   "version": "1.2.0",
-  "description": "Standard error objects for jade",
+  "description": "Standard error objects for pug",
   "keywords": [
-    "jade"
+    "pug"
   ],
   "files": [
     "index.js"
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jadejs/jade-error.git"
+    "url": "https://github.com/pugjs/pug-error.git"
   },
   "author": "Forbes Lindesay",
   "license": "MIT"

@@ -25,12 +25,12 @@ function makeError(code, message, options) {
       }
       return out;
     }).join('\n');
-    fullMessage = (filename || 'Jade') + ':' + location + '\n' + context + '\n\n' + message;
+    fullMessage = (filename || 'Pug') + ':' + location + '\n' + context + '\n\n' + message;
   } else {
-    fullMessage = (filename || 'Jade') + ':' + location + '\n\n' + message;
+    fullMessage = (filename || 'Pug') + ':' + location + '\n\n' + message;
   }
   var err = new Error(fullMessage);
-  err.code = 'JADE:' + code;
+  err.code = 'PUG:' + code;
   err.msg = message;
   err.line = line;
   err.column = column;
