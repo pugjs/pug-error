@@ -1,24 +1,24 @@
-# jade-error
+# pug-error
 
-Standard error objects for jade.  This module is intended for use by the lexer, parser, loader, linker, code-generator and any plugins.
+Standard error objects for pug.  This module is intended for use by the lexer, parser, loader, linker, code-generator and any plugins.
 
-[![Build Status](https://img.shields.io/travis/jadejs/jade-error/master.svg)](https://travis-ci.org/jadejs/jade-error)
-[![Dependency Status](https://img.shields.io/gemnasium/jadejs/jade-error.svg)](https://gemnasium.com/jadejs/jade-error)
-[![NPM version](https://img.shields.io/npm/v/jade-error.svg)](https://www.npmjs.org/package/jade-error)
+[![Build Status](https://img.shields.io/travis/pugjs/pug-error/master.svg)](https://travis-ci.org/pugjs/pug-error)
+[![Dependency Status](https://img.shields.io/gemnasium/pugjs/pug-error.svg)](https://gemnasium.com/pugjs/pug-error)
+[![NPM version](https://img.shields.io/npm/v/pug-error.svg)](https://www.npmjs.org/package/pug-error)
 
 ## Installation
 
-    npm install jade-error
+    npm install pug-error
 
 ## Usage
 
 ```js
-var error = require('jade-error');
+var error = require('pug-error');
 ```
 
 ### `error(code, message, options)`
 
-Create a Jade error object.
+Create a Pug error object.
 
 `code` is a required unique code for the error type that can be used to pinpoint a certain error.
 
@@ -29,17 +29,17 @@ Create a Jade error object.
 - `filename`: the name of the file causing the error
 - `line`: the offending line
 - `column`: the offending column
-- `src`: the Jade source, if available, for pretty-printing the error context
+- `src`: the Pug source, if available, for pretty-printing the error context
 
 The resulting error object is a simple Error object with additional properties given in the arguments.
 
 **Caveat:** the `message` argument is stored in `err.msg`, not `err.message`, which is occupied with a better-formatted message.
 
 ```js
-var error = require('jade-error');
+var error = require('pug-error');
 
 var err = error('MY_CODE', 'My message', {line: 3, filename: 'myfile', src: 'foo\nbar\nbaz\nbash\nbing'});
-// { code: 'JADE:MY_CODE',
+// { code: 'PUG:MY_CODE',
 //   msg: 'My message',
 //   line: 3,
 //   column: undefined,
