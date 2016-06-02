@@ -8,7 +8,7 @@ function makeError(code, message, options) {
   var src = options.src;
   var fullMessage;
   var location = line + (column ? ':' + column : '');
-  if (src) {
+  if (src && line >= 1 && line <= src.split('\n').length) {
     var lines = src.split('\n');
     var start = Math.max(line - 3, 0);
     var end = Math.min(lines.length, line + 3);
@@ -19,7 +19,7 @@ function makeError(code, message, options) {
         + curr
         + '| ';
       var out = preamble + text;
-      if (curr === line && column) {
+      if (curr === line && column > 0) {
         out += '\n';
         out += Array(preamble.length + column).join('-') + '^';
       }

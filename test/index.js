@@ -66,3 +66,29 @@ test('with column', function () {
     assert(err.src === undefined);
   });
 });
+
+test('invalid information', function () {
+  test('negative column', function () {
+    var err = error('MY_CODE', 'My message', {line: 3, column: -1, src: 'foo\nbar\nbaz\nbash\nbing'});
+    assert.strictEqual(err.message, 'Pug:3:-1\n    1| foo\n    2| bar\n  > 3| baz\n    4| bash\n    5| bing\n\nMy message');
+    assert.strictEqual(err.code, 'PUG:MY_CODE');
+    assert.strictEqual(err.msg, 'My message');
+    assert.strictEqual(err.line, 3);
+    assert.strictEqual(err.filename, undefined);
+    assert.strictEqual(err.src, 'foo\nbar\nbaz\nbash\nbing');
+  })
+  test('out of range line', function () {
+    check(0);
+    check(6);
+
+    function check(line) {
+      var err = error('MY_CODE', 'My message', {line: line, src: 'foo\nbar\nbaz\nbash\nbing'});
+      assert.strictEqual(err.message, 'Pug:' + line + '\n\nMy message');
+      assert.strictEqual(err.code, 'PUG:MY_CODE');
+      assert.strictEqual(err.msg, 'My message');
+      assert.strictEqual(err.line, line);
+      assert.strictEqual(err.filename, undefined);
+      assert.strictEqual(err.src, 'foo\nbar\nbaz\nbash\nbing');
+    }
+  });
+});
